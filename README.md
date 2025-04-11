@@ -22,8 +22,62 @@ Follow me for Latest AI Updates: https://www.youtube.com/c/RiazHatvi
 
 ## 🧰 Requirements
 
-Install dependencies:
 ```bash
 pip install transformers torch soundfile datasets
 pip install git+https://github.com/huggingface/transformers.git
+
+
+🧪 How to Use
+Step 1: Clone the repository
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/Text2Speech-T5.git
+cd Text2Speech-T5
+Step 2: Run the script in a Jupyter Notebook or Colab
+python
+Copy
+Edit
+from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan
+import torch
+import numpy as np
+from datasets import load_dataset
+from IPython.display import Audio
+
+# Load models
+processor = SpeechT5Processor.from_pretrained("microsoft/speecht5_tts")
+model = SpeechT5ForTextToSpeech.from_pretrained("microsoft/speecht5_tts")
+vocoder = SpeechT5HifiGan.from_pretrained("microsoft/speecht5_hifigan")
+embeddings_dataset = load_dataset("Matthijs/cmu-arctic-xvectors", split="validation")
+
+def get_custom_input():
+    text = input("Enter your text (max 500 characters):\n")[:500]
+    speaker_idx = int(input("Choose speaker index (e.g., 7306 for female, 0 for male): ") or "7306")
+    return text, speaker_idx
+
+def generate_custom_speech():
+    text, speaker_idx = get_custom_input()
+    try:
+        speaker_embeddings = torch.tensor(embeddings_dataset[speaker_idx]["xvector"]).unsqueeze(0)
+    except:
+        print("Invalid speaker index! Using default.")
+        speaker_embeddings = torch.tensor(embeddings_dataset[7306]["xvector"]).unsqueeze(0)
+
+    chunks = [text[i:i+200] for i in range(0, len(text), 200)]
+    full_audio = []
+    for chunk in chunks:
+        inputs = processor(text=chunk, return_tensors="pt")
+        speech = model.generate_speech(inputs["input_ids"], speaker_embeddings, vocoder=vocoder)
+        full_audio.append(speech.numpy())
+
+    final_audio = np.concatenate(full_audio)
+    display(Audio(final_audio, rate=16000))
+
+# Run it
+generate_custom_speech()
+📊 Speaker Embeddings
+We use Matthijs/cmu-arctic-xvectors dataset for voice style control. Try different indices to switch voices.
+Install dependencies:
+
+
 
