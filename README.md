@@ -28,6 +28,7 @@ pip install git+https://github.com/huggingface/transformers.git
 
 
 🧪 How to Use
+```
 Step 1: Clone the repository
 bash
 Copy
