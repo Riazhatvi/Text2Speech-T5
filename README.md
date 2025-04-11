@@ -13,12 +13,7 @@ This repository showcases a Python-based Text-to-Speech (TTS) tool powered by Mi
 - ✂️ Supports long input text by breaking into manageable chunks
 - 📦 Easy to run in Jupyter or Colab
 
-  👨‍💻 Author
-Riaz Khan — @riazhatvi
-
-⭐ Show Some Love
-If you found this useful, please consider giving it a ⭐ on GitHub!
-Follow me for Latest AI Updates: https://www.youtube.com/c/RiazHatvi
+ 
 
 ## 🧰 Requirements
 
@@ -28,7 +23,7 @@ pip install git+https://github.com/huggingface/transformers.git
 
 ```
 🧪 How to Use
-```
+
 Step 1: Clone the repository
 ```bash
 git clone https://github.com/yourusername/Text2Speech-T5.git
@@ -70,12 +65,19 @@ def generate_custom_speech():
 
     final_audio = np.concatenate(full_audio)
     display(Audio(final_audio, rate=16000))
-```
+
 # Run it
 generate_custom_speech()
+```
 📊 Speaker Embeddings
+
 We use Matthijs/cmu-arctic-xvectors dataset for voice style control. Try different indices to switch voices.
 Install dependencies:
 
+ 👨‍💻 Author
+Riaz Khan — @riazhatvi
 
+⭐ Show Some Love
+If you found this useful, please consider giving it a ⭐ on GitHub!
+Follow me for Latest AI Updates: https://www.youtube.com/c/RiazHatvi
 
