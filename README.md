@@ -26,19 +26,16 @@ Follow me for Latest AI Updates: https://www.youtube.com/c/RiazHatvi
 pip install transformers torch soundfile datasets
 pip install git+https://github.com/huggingface/transformers.git
 
-
+```
 🧪 How to Use
 ```
 Step 1: Clone the repository
-bash
-Copy
-Edit
+```bash
 git clone https://github.com/yourusername/Text2Speech-T5.git
 cd Text2Speech-T5
+```
 Step 2: Run the script in a Jupyter Notebook or Colab
-python
-Copy
-Edit
+```bash
 from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan
 import torch
 import numpy as np
@@ -73,7 +70,7 @@ def generate_custom_speech():
 
     final_audio = np.concatenate(full_audio)
     display(Audio(final_audio, rate=16000))
-
+```
 # Run it
 generate_custom_speech()
 📊 Speaker Embeddings
